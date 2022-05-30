@@ -1,9 +1,9 @@
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'pujan',
+  user: 'postgres',
   host:'localhost',
   database: 'api',
-  password: 'pujan1',
+  password: 'aug301999',
   port: 5432,
 })
 
@@ -17,7 +17,7 @@ const getCountries = (request, response) =>{
 }
 
 const getCountryById = (request, response)=>{
-  const id = parseInt(request.parms.id)
+  const id = parseInt(request.params.id)
 
   pool.query('SELECT * FROM countries WHERE id = $1', [id], (error,results)=>{
     if (error){
@@ -45,7 +45,7 @@ const updateCountry = (request, response)=>{
   pool.query(
     'UPDATE countries SET name = $1, capital = $2 WHERE id = $3',
     [name, capital, id],
-    (error, response)=>{
+    (error, results)=>{
       if (error){
         throw error
       }
